@@ -6,6 +6,8 @@
 
         <title>Laravel</title>
 
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -80,8 +82,10 @@
             @endif
 
             <div id="root">
-                rotta assegnata a guest.home
+                
             </div>
         </div>
+
+        <script src="{{ asset('js/front.js') }}"></script>
     </body>
 </html>
