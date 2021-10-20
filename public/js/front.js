@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1924,8 +1926,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'App'
+  name: 'App',
+  data: function data() {
+    return {
+      posts: []
+    };
+  },
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts').then(function (res) {
+        _this.posts = res.data;
+      })["catch"](function (err) {
+        console.error(err);
+      });
+    }
+  },
+  created: function created() {
+    this.getPosts();
+  }
 });
 
 /***/ }),
@@ -37591,29 +37622,48 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("main", [
+      _c(
+        "section",
+        { attrs: { id: "posts-list" } },
+        [
+          _c("h2", [_vm._v("Posts List")]),
+          _vm._v(" "),
+          _vm._l(_vm.posts, function(post) {
+            return _c("div", { key: post.id, staticClass: "card mb-3" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _vm._v(
+                  "\n                " + _vm._s(post.title) + "\n              "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c("blockquote", { staticClass: "blockquote mb-0" }, [
+                  _c("p", [_vm._v(_vm._s(post.content))]),
+                  _vm._v(" "),
+                  _c("footer", { staticClass: "blockquote-footer" }, [
+                    _vm._v(_vm._s(post.created_at))
+                  ])
+                ])
+              ])
+            ])
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header text-center" }, [
-              _vm._v("Another Blog")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body text-center" }, [
-              _vm._v(
-                "\n                    Under Construction\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("header", [
+      _c("h1", { staticClass: "text-center" }, [_vm._v("My Blog")])
     ])
   }
 ]
