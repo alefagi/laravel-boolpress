@@ -13,7 +13,7 @@
                   <div class="card-body">
                     <blockquote class="blockquote mb-0">
                       <p>{{ post.content}}</p>
-                      <footer class="blockquote-footer">{{ post.created_at }}</footer>
+                      <footer class="blockquote-footer text-right">{{ getFormattedDate(post.created_at) }}</footer>
                     </blockquote>
                   </div>
                 </div>
@@ -43,7 +43,16 @@
                 .catch(err => {
                     console.error(err);
                 });
-            }
+            },
+            getFormattedDate(date) {
+                const postDate = new Date(date);
+                const postDay = postDate.getDate();
+                const postMonth = postDate.getMonth() + 1;
+                const postYear = postDate.getFullYear();
+
+                const formattedDate = `${postDay}/${postMonth}/${postYear}`;
+                return formattedDate;
+            },
         },
         created() {
             this.getPosts();

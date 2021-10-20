@@ -1952,6 +1952,14 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.error(err);
       });
+    },
+    getFormattedDate: function getFormattedDate(date) {
+      var postDate = new Date(date);
+      var postDay = postDate.getDate();
+      var postMonth = postDate.getMonth() + 1;
+      var postYear = postDate.getFullYear();
+      var formattedDate = "".concat(postDay, "/").concat(postMonth, "/").concat(postYear);
+      return formattedDate;
     }
   },
   created: function created() {
@@ -37644,9 +37652,11 @@ var render = function() {
                 _c("blockquote", { staticClass: "blockquote mb-0" }, [
                   _c("p", [_vm._v(_vm._s(post.content))]),
                   _vm._v(" "),
-                  _c("footer", { staticClass: "blockquote-footer" }, [
-                    _vm._v(_vm._s(post.created_at))
-                  ])
+                  _c(
+                    "footer",
+                    { staticClass: "blockquote-footer text-right" },
+                    [_vm._v(_vm._s(_vm.getFormattedDate(post.created_at)))]
+                  )
                 ])
               ])
             ])
