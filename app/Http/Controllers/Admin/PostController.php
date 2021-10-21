@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class PostController extends Controller
     public function create()
     {
         $post = new Post();
-        return view('admin.posts.create', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.create', compact('post', 'categories'));
     }
 
     /**
@@ -43,7 +45,8 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|unique:posts|min:1',
             'content' => 'required|string',
-            'image' => 'string'
+            'image' => 'string',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $data = $request->all();
@@ -75,7 +78,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -90,7 +95,8 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string', Rule::unique('posts')->ignore($post->id),'min:1'],
             'content' => 'required|string',
-            'image' => 'string'
+            'image' => 'string',
+            'category_id' => 'nullable|exists:categories,id'
         ]);
 
         $data = $request->all();

@@ -5,6 +5,7 @@
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->content }}</p>
     <address>{{ $post->getFormattedDate('created_at') }}</address>
+    <address>Category: @if($post->category) {{ $post->category->name }} @else No category @endif</address>
     <div class="d-flex justify-content-end">
       <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-warning ml-2">Edit</a>
 
