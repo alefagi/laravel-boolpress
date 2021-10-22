@@ -4,6 +4,7 @@
   <div class="container">
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->content }}</p>
+    <address>Author: @if($post->user) {{ $post->user->name }} @else Anonymous @endif</address>
     <address>{{ $post->getFormattedDate('created_at') }}</address>
     <address>Category: @if($post->category) {{ $post->category->name }} @else No category @endif</address>
     <div class="d-flex justify-content-end">
