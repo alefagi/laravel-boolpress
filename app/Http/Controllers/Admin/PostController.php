@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -50,7 +51,10 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
+
         $post = new Post();
+        $data['user_id'] = Auth::id();
+
         $post->fill($data);
 
         $post->slug = Str::slug($post->title, '-');

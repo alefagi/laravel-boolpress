@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'slug', 'image', 'category_id'];
+    protected $fillable = ['title', 'content', 'slug', 'image', 'category_id', 'user_id'];
     
     public function getFormattedDate($col, $format = 'd-m-Y H:i:s') 
     {
@@ -17,5 +17,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }
