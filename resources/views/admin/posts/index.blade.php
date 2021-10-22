@@ -15,7 +15,8 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Title</th>
-          <th scope="col">Category</th>
+          <th scope="col">Category</th>  
+          <th scope="col">Author</th>  
           <th scope="col">Created At</th>
           <th scope="col">Actions</th>
         </tr>
@@ -26,6 +27,7 @@
             <th scope="row">{{ $post->id }}</th>
             <td>{{ $post->title }}</td>
             <td>@if($post->category) {{ $post->category->name }} @else No category @endif</td>
+            <td>@if($post->user) {{ $post->user->name }} @else Anonymous @endif</td>
             <td>{{ $post->getFormattedDate('created_at') }}</td>
             <td class="d-flex align-items-start @if($loop->first) border-top-0 @endif">
               <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">View</a>
