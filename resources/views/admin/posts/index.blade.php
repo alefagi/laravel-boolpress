@@ -16,6 +16,7 @@
           <th scope="col">ID</th>
           <th scope="col">Title</th>
           <th scope="col">Category</th>  
+          <th scope="col">Tags</th>  
           <th scope="col">Author</th>  
           <th scope="col">Author Address</th>  
           <th scope="col">Created At</th>
@@ -28,6 +29,12 @@
             <th scope="row">{{ $post->id }}</th>
             <td>{{ $post->title }}</td>
             <td>@if($post->category) {{ $post->category->name }} @else No category @endif</td>
+            <td>
+              @forelse ($post->tags as $tag)
+              <span class="badge badge-pill" style="background-color: {{ $tag->color }}">{{ $tag->name }}</span>
+              @empty -
+              @endforelse
+            </td>
             <td>@if($post->user) {{ $post->user->name }} @else Anonymous @endif</td>
             <td>@if($post->user) {{ $post->user->userInfo->address }} @else - @endif</td>
             <td>{{ $post->getFormattedDate('created_at') }}</td>
