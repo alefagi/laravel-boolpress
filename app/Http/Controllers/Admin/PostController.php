@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -32,7 +33,9 @@ class PostController extends Controller
     {
         $post = new Post();
         $categories = Category::all();
-        return view('admin.posts.create', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -60,6 +63,8 @@ class PostController extends Controller
         $post->slug = Str::slug($post->title, '-');
         $post->save();
 
+        if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
+
         return redirect()->route('admin.posts.show', compact('post'));
     }
 
@@ -83,8 +88,11 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tagsId = Tag::$post->tags->pluck('id')->toArray();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tagsId'));
     }
 
     /**
@@ -107,6 +115,9 @@ class PostController extends Controller
         
         $data['slug'] = Str::slug($data['title'], '-');
 
+        if(!array_key_exists('tags', $data)) $post->tags()->detach();
+        else $post->tags()->sync($data['tags']);
+        
         $post->update($data);
 
         return redirect()->route('admin.posts.show', $post->id);
