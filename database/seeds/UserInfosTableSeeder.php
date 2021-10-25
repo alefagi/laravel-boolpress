@@ -14,7 +14,7 @@ class UserInfosTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $user_info = new UserInfo;
-        $user_info->user_id = '1';
+        $user_info->user_id = '3';
         $user_info->lastname = $faker->lastname();
         $user_info->address = $faker->address();
         $user_info->phone = $faker->phoneNumber();
