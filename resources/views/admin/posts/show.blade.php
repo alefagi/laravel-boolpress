@@ -4,6 +4,9 @@
   <div class="container">
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->content }}</p>
+    @if ($post->cover)
+      <img class="img-fluid mb-2" src="{{ asset('storage/' . $post->cover) }}">
+    @endif
     <address>Author: @if($post->user) {{ $post->user->name }} @else Anonymous @endif</address>
     <address>{{ $post->getFormattedDate('created_at') }}</address>
     <address>Category: @if($post->category) {{ $post->category->name }} @else No category @endif</address>

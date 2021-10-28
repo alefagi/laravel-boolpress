@@ -13,6 +13,7 @@
                   <div class="card-body">
                     <blockquote class="blockquote mb-0">
                       <p>{{ post.content}}</p>
+                      <img v-if="post.cover" class="img-fluid mb-2" :src="'./storage/' + post.cover">
                       <footer class="blockquote-footer text-right">{{ getFormattedDate(post.created_at) }}</footer>
                     </blockquote>
                   </div>

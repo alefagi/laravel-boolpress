@@ -52,7 +52,8 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'string',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'cover' => 'image'
         ]);
 
         $data = $request->all();
@@ -64,7 +65,7 @@ class PostController extends Controller
 
         $post->slug = Str::slug($post->title, '-');
         $img_path = Storage::put('public', $data['cover']);
-        $post->cover = $img_path;
+        $data['cover'] = $img_path;
 
         $post->save();
 
@@ -114,7 +115,8 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'string',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'cover' => 'image'
         ]);
 
         $data = $request->all();
@@ -125,7 +127,7 @@ class PostController extends Controller
         else $post->tags()->sync($data['tags']);
 
         $img_path = Storage::put('public', $data['cover']);
-        $post->cover = $img_path;
+        $data['cover'] = $img_path;
 
         $post->update($data);
 

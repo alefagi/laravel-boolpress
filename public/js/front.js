@@ -1934,6 +1934,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
@@ -37650,6 +37651,13 @@ var render = function() {
               _c("div", { staticClass: "card-body" }, [
                 _c("blockquote", { staticClass: "blockquote mb-0" }, [
                   _c("p", [_vm._v(_vm._s(post.content))]),
+                  _vm._v(" "),
+                  post.cover
+                    ? _c("img", {
+                        staticClass: "img-fluid mb-2",
+                        attrs: { src: "./storage/" + post.cover }
+                      })
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "footer",
