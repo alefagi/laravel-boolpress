@@ -1,5 +1,5 @@
 @if ($post->exists)
-  <form method="post" action="{{ route('admin.posts.update', $post->id) }}">
+  <form method="post" enctype="multipart/form-data" action="{{ route('admin.posts.update', $post->id) }}">
     @method('PATCH')
     
   @else
@@ -30,13 +30,25 @@
   </div>
 
   <div class="form-group">
-    <label for="image">Image</label>
+    <label for="image">Image URL</label>
     <input type="text" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image', $post->image) }}">
     @error('image') 
       <div class="invalid-feedback">
         {{ $message }}
       </div>
     @enderror
+  </div>
+
+  <div class="input-group mb-2">
+    <div class="custom-file">
+      <label for="cover" class="custom-file-label">Choose Image to Upload</label>
+      <input type="file" class="custom-file-input @error('cover') is-invalid @enderror" id="cover" name="cover" value="{{ old('cover', $post->cover) }}">
+      @error('cover') 
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+      @enderror
+    </div>
   </div>
 
   <div class="form-group">
