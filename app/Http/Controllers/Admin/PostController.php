@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -62,6 +63,9 @@ class PostController extends Controller
         $post->fill($data);
 
         $post->slug = Str::slug($post->title, '-');
+        $img_path = Storage::put('public', $data['cover']);
+        $post->cover = $img_path;
+
         $post->save();
 
         if(array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
@@ -119,6 +123,9 @@ class PostController extends Controller
 
         if(!array_key_exists('tags', $data)) $post->tags()->detach();
         else $post->tags()->sync($data['tags']);
+
+        $img_path = Storage::put('public', $data['cover']);
+        $post->cover = $img_path;
 
         $post->update($data);
 
